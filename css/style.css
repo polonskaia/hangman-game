@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+/* gabriela-regular - latin_cyrillic */
+@font-face {
+  font-family: 'Gabriela';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+    url('../fonts/gabriela-v12-latin_cyrillic-regular.woff2') format('woff2'),
+    url('../fonts/gabriela-v12-latin_cyrillic-regular.woff') format('woff');
+}
+
+:root {
+  --white: #fff;
+  --red: #ff0303;
+  --green: #2cd770;
+  --main-background: #272727;
+  --dark-grey: #303030;
+  --light-grey: #c2c2c2;
+}
+
+html {
+  font-family: 'Gabriela', serif;
+}
+
+body {
+  background-color: var(--main-background);
+}
