@@ -1,0 +1,17 @@
+<svg width="360" height="628" viewBox="0 0 360 628" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 626C0 626 77.356 626 125 626" stroke="white" stroke-width="3"/>
+<line x1="60.5" y1="626" x2="60.5" y2="3" stroke="white" stroke-width="3"/>
+<line x1="59" y1="1.5" x2="281" y2="1.5" stroke="white" stroke-width="3"/>
+<circle cx="281" cy="116" r="61.5" stroke="white" stroke-width="3"/>
+<line x1="279.5" y1="53.01" x2="279.5" y2="3.00001" stroke="white" stroke-width="3"/>
+<line x1="282.5" y1="178" x2="282.5" y2="341" stroke="white" stroke-width="3"/>
+<line x1="282.13" y1="339.987" x2="206.13" y2="426.987" stroke="white" stroke-width="3"/>
+<line y1="-1.5" x2="115.521" y2="-1.5" transform="matrix(0.657892 0.753113 0.753113 -0.657892 284 339)" stroke="white" stroke-width="3"/>
+<line x1="252.669" y1="90.2567" x2="272.669" y2="108.257" stroke="#FF0303" stroke-width="2"/>
+<line y1="-1" x2="26.9072" y2="-1" transform="matrix(0.743294 -0.668965 -0.668965 -0.743294 252 109)" stroke="#FF0303" stroke-width="2"/>
+<line y1="-1" x2="26.9072" y2="-1" transform="matrix(0.743294 -0.668965 -0.668965 -0.743294 293 109)" stroke="#FF0303" stroke-width="2"/>
+<path d="M303.334 151.023C303.334 151.023 293.073 139.92 283.001 139.489C272.929 139.058 261.891 150.209 262.001 151.023C262.111 150.13 271.261 134.965 283.001 136.056C296.361 135.476 303.334 151.023 303.334 151.023Z" fill="white"/>
+<path d="M282 179.238L206 231.238" stroke="white" stroke-width="3"/>
+<line x1="293.669" y1="90.2567" x2="313.669" y2="108.257" stroke="#FF0303" stroke-width="2"/>
+<line y1="-1.5" x2="92.0869" y2="-1.5" transform="matrix(0.825307 0.564684 0.564684 -0.825307 284 178)" stroke="white" stroke-width="3"/>
+</svg>
