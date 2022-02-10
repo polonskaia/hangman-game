@@ -43,6 +43,7 @@ body {
 }
 
 .container {
+  position: relative;
   display: flex;
   margin: 0 auto;
   padding: 30px 50px;
@@ -87,11 +88,18 @@ body {
   background-position: bottom 40px left 50px;
 }
 
-.hangman-paint-container.background-none {
+.background-none {
   background-image: none;
 }
 
-.start-line {
+.sad-emoji {
+  background-image: url('../img/sad-emoji.svg');
+  background-repeat: no-repeat;
+  background-position: top 128px right 82px;
+  opacity: 1;
+}
+
+.first-line {
   position: absolute;
   bottom: 40px;
   left: 50px;
@@ -194,6 +202,66 @@ body {
 
 .alphabet-button:hover {
   color: var(--light-grey);
+}
+
+.alphabet-button:disabled:hover {
+  color: var(--white);
+}
+
+.win-modal {
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  width: 600px;
+  border-radius: 7px;
+  background-color: #4d4d4d;
+  opacity: 0;
+  visibility: hidden;
+  transition: opasity .5s ease-in, visibility .5s ease-in;
+}
+
+.win-modal_good-job {
+  margin-bottom: 30px;
+  font-size: 40px;
+  color: var(--white);
+}
+
+.win-modal-guessed-word {
+  text-align: center;
+  color: var(--white);
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+.guessed-word {
+  font-style: italic;
+  color: var(--green);
+}
+
+.game-again-button {
+  padding: 15px 20px;
+  border-radius: 7px;
+  border: none;
+  background-color: var(--white);
+  font-size: 25px;
+  color: var(--main-background);
+  transition: color .3s ease-in, background-color .3s ease-in;
+  cursor: pointer;
+}
+
+.game-again-button:hover {
+  background-color: #e7e5e5;
+  color: #000;
+}
+
+.bi-emoji-smile {
+  width: 25px;
+  height: 25px;
+  vertical-align: top;
 }
 
 .visible {
