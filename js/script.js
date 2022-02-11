@@ -7,7 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const alphabetContainer = document.querySelector('.alphabet');
   const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#fff';
+  const winModal = document.querySelector('.win-modal');
+  const guessedWord = document.querySelector('.guessed-word');
+  const gameAgainButton = document.querySelector('.game-again-button');
+
+  let word;
+  let answerArray = [];
 
   const alphabet = ['А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж',
    'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О',
@@ -47,163 +52,43 @@ document.addEventListener('DOMContentLoaded', () => {
     'волос'
   ];
 
-  const word = wordsArray[Math.floor(Math.random() * wordsArray.length)];
-  console.log(word)
-
-  let answerArray = [];
-  for (let i = 0; i < word.length; i++) {
-    answerArray[i] = '_';
-  }
-
   startButton.addEventListener('click', () => {
-    setTimeout(() => paintContainer.classList.add('background-none'), 300);
+    startButton.setAttribute('disabled', true);
     mistakes.classList.add('visible');
     startButton.classList.add('hidden');
+    setTimeout(() => paintContainer.classList.add('background-none'), 300);
+
+    getRandomWord();
     createWordCells();
     createAlphabet();
     getActiveLetter();
   });
 
-  function drawHangedSegment(mistakes) {
-    if (mistakes === '1') {
+  gameAgainButton.addEventListener('click', () => {
+    answerArray = [];
+    ctx.clearRect(0, 0, 450, 700);
 
-      ctx.beginPath();
-      let position = 172;
-      setInterval(() => {
-        ctx.fillRect(position, 657, 3, 3);
+    gameAgainButton.setAttribute('disabled', true);
+    winModal.classList.remove('visible');
+    mistakesNumber.textContent = '0';
+    mistakesNumber.classList.remove('red');
+    alphabetContainer.classList.remove('hidden');
 
-        position = position - 3;
-        if (position <= 50) {
-          position = 50;
-        }
-      }, 5);
+    getRandomWord();
+    removeWordCells();
+    createWordCells();
+    createAlphabet();
+    getActiveLetter();
+  });
 
-    } else if (mistakes === '2') {
+  function getRandomWord() {
+    word = wordsArray[Math.floor(Math.random() * wordsArray.length)];
 
-      ctx.beginPath();
-      let position = 657;
-      setInterval(() => {
-        ctx.fillRect(111, position, 3, 3);
-        position = position - 3;
-        if (position <= 40) {
-          position = 40;
-        }
-      }, 5);
-
-    } else if (mistakes === '3') {
-
-      ctx.beginPath();
-      let position = 111;
-      setInterval(() => {
-        ctx.fillRect(position, 40 , 3, 3);
-        position = position + 3;
-        if (position >= 333) {
-          position = 333;
-        }
-      }, 5);
-
-    } else if (mistakes === '4') {
-
-      ctx.beginPath();
-      let position = 40;
-      setInterval(() => {
-        ctx.fillRect(333, position, 3, 3);
-        position = position + 3;
-        if (position >= 90) {
-          position = 90;
-        }
-      }, 5);
-
-    } else if (mistakes === '5') {
-
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = '#fff';
-      ctx.beginPath();
-      ctx.arc(333, 155, 63, 0, Math.PI * 2, false);
-      ctx.stroke();
-
-    } else if (mistakes === '6') {
-
-      ctx.beginPath();
-      let position = 218;
-      setInterval(() => {
-        ctx.fillRect(333, position, 3, 3);
-        position = position + 3;
-        if (position >= 380) {
-          position = 380;
-        }
-      }, 5);
-
-    } else if (mistakes === '7') {
-
-      ctx.beginPath();
-      let positionX = 333;
-      let positionY = 218;
-      setInterval(() => {
-        ctx.fillRect(positionX, positionY, 3, 3);
-        positionX = positionX - 3;
-        positionY = positionY + 3;
-        if (positionX <= 258) {
-          positionX = 258;
-        }
-        if (positionY >= 292) {
-          positionY = 292;
-        }
-      }, 5);
-
-    } else if (mistakes === '8') {
-
-      ctx.beginPath();
-      let positionX = 333;
-      let positionY = 218;
-      setInterval(() => {
-        ctx.fillRect(positionX, positionY, 3, 3);
-        positionX = positionX + 3;
-        positionY = positionY + 3;
-        if (positionX >= 408) {
-          positionX = 408;
-        }
-        if (positionY >= 292) {
-          positionY = 292;
-        }
-      }, 30);
-
-    } else if (mistakes === '9') {
-
-      ctx.beginPath();
-      let positionX = 333;
-      let positionY = 380;
-      setInterval(() => {
-        ctx.fillRect(positionX, positionY, 3, 3);
-        positionX = positionX - 3;
-        positionY = positionY + 3;
-        if (positionX <= 258) {
-          positionX = 258;
-        }
-        if (positionY >= 454) {
-          positionY = 454;
-        }
-      }, 30);
-
-    } else if (mistakes === '10') {
-
-      ctx.beginPath();
-      let positionX = 333;
-      let positionY = 380;
-      setInterval(() => {
-        ctx.fillRect(positionX, positionY, 3, 3);
-        positionX = positionX + 3;
-        positionY = positionY + 3;
-        if (positionX >= 408) {
-          positionX = 408;
-        }
-        if (positionY >= 454) {
-          positionY = 454;
-        }
-      }, 30);
-
-      setTimeout(() => paintContainer.classList.add('sad-emoji'), 500);
+    for (let i = 0; i < word.length; i++) {
+      answerArray[i] = '_';
     }
+
+    console.log(word);
   }
 
   function createWordCells() {
@@ -232,6 +117,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function removeAlphabet() {
+    const alphabet = document.querySelectorAll('.alphabet-element');
+
+    alphabet.forEach((letter) => {
+      letter.remove();
+    });
+  }
+
+  function removeWordCells() {
+    const wordCells = document.querySelectorAll('.letter-cell');
+
+    wordCells.forEach((cell) => {
+      cell.remove();
+    });
+  }
+
   function getActiveLetter() {
     const alphabetButton = document.querySelectorAll('.alphabet-button');
 
@@ -257,10 +158,14 @@ document.addEventListener('DOMContentLoaded', () => {
         answerArray[i] = actLet;
         cells[i].textContent = actLet;
         btn.closest('div').classList.add('right-letter');
-        btn.setAttribute('disabled', 'disabled');
+        btn.setAttribute('disabled', true);
       }
     }
 
+    finishGameIfWin();
+  }
+
+  function finishGameIfWin() {
     const alphabetButtons = document.querySelectorAll('.alphabet-button');
 
     const answer = answerArray.join('');
@@ -268,15 +173,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (word === answer) {
       alphabetButtons.forEach((btn) => {
-        btn.setAttribute('disabled', 'disabled');
+        btn.setAttribute('disabled', true);
       });
+
+      alphabetContainer.classList.add('hidden');
+
+      setTimeout(() => {
+        removeAlphabet();
+      }, 500);
+
+      guessedWord.textContent = word;
+      winModal.classList.add('visible');
+      gameAgainButton.removeAttribute('disabled');
     }
   }
 
   function countMistakes(actLet, btn) {
     if (answerArray.includes(actLet) === false) {
       btn.closest('div').classList.add('wrong-letter');
-      btn.setAttribute('disabled', 'disabled');
+      btn.setAttribute('disabled', true);
 
       mistakesNumber.textContent = String(Number(mistakesNumber.textContent) + 1);
       mistakesNumber.classList.add('red');
@@ -286,11 +201,133 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (mistakesNumber.textContent === '10') {
       alphabetButtons.forEach((btn) => {
-        btn.setAttribute('disabled', 'disabled');
+        btn.setAttribute('disabled', true);
       });
+
+      setTimeout(() => paintContainer.classList.add('sad-emoji'), 500);
     }
 
     drawHangedSegment(mistakesNumber.textContent);
   }
 
+  function drawHangedSegment(mistakes) {
+    ctx.fillStyle = '#fff';
+
+    if (mistakes === '1') {
+      let position = 172;
+      setInterval(() => {
+        ctx.fillRect(position, 657, 3, 3);
+        position = position - 3;
+        if (position <= 50) {
+          position = 50;
+        }
+      }, 5);
+
+    } else if (mistakes === '2') {
+      let position = 657;
+      setInterval(() => {
+        ctx.fillRect(111, position, 3, 3);
+        position = position - 3;
+        if (position <= 40) {
+          position = 40;
+        }
+      }, 1);
+
+    } else if (mistakes === '3') {
+      let position = 111;
+      setInterval(() => {
+        ctx.fillRect(position, 40 , 3, 3);
+        position = position + 3;
+        if (position >= 333) {
+          position = 333;
+        }
+      }, 5);
+
+    } else if (mistakes === '4') {
+      let position = 40;
+      setInterval(() => {
+        ctx.fillRect(333, position, 3, 3);
+        position = position + 3;
+        if (position >= 90) {
+          position = 90;
+        }
+      }, 5);
+
+    } else if (mistakes === '5') {
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#fff';
+      ctx.arc(333, 155, 63, 0, Math.PI * 2, false);
+      ctx.stroke();
+
+    } else if (mistakes === '6') {
+      let position = 218;
+      setInterval(() => {
+        ctx.fillRect(333, position, 3, 3);
+        position = position + 3;
+        if (position >= 380) {
+          position = 380;
+        }
+      }, 5);
+
+    } else if (mistakes === '7') {
+      let positionX = 333;
+      let positionY = 218;
+      setInterval(() => {
+        ctx.fillRect(positionX, positionY, 3, 3);
+        positionX = positionX - 3;
+        positionY = positionY + 3;
+        if (positionX <= 258) {
+          positionX = 258;
+        }
+        if (positionY >= 292) {
+          positionY = 292;
+        }
+      }, 5);
+
+    } else if (mistakes === '8') {
+      let positionX = 333;
+      let positionY = 218;
+      setInterval(() => {
+        ctx.fillRect(positionX, positionY, 3, 3);
+        positionX = positionX + 3;
+        positionY = positionY + 3;
+        if (positionX >= 408) {
+          positionX = 408;
+        }
+        if (positionY >= 292) {
+          positionY = 292;
+        }
+      }, 5);
+
+    } else if (mistakes === '9') {
+      let positionX = 333;
+      let positionY = 380;
+      setInterval(() => {
+        ctx.fillRect(positionX, positionY, 3, 3);
+        positionX = positionX - 3;
+        positionY = positionY + 3;
+        if (positionX <= 258) {
+          positionX = 258;
+        }
+        if (positionY >= 454) {
+          positionY = 454;
+        }
+      }, 5);
+
+    } else if (mistakes === '10') {
+      let positionX = 333;
+      let positionY = 380;
+      setInterval(() => {
+        ctx.fillRect(positionX, positionY, 3, 3);
+        positionX = positionX + 3;
+        positionY = positionY + 3;
+        if (positionX >= 408) {
+          positionX = 408;
+        }
+        if (positionY >= 454) {
+          positionY = 454;
+        }
+      }, 5);
+    }
+  }
 });
