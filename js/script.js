@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const winModal = document.querySelector('.win-modal');
   const guessedWord = document.querySelector('.guessed-word');
   const gameAgainButton = document.querySelector('.game-again-button');
+  const gameoverModal = document.querySelector('.gameover-modal');
+  const unguessedWord = document.querySelector('.unguessed-word');
+  const gameAgainAfterGameover = document.querySelector('.gameover-modal_again-button');
 
   let word;
   let answerArray = [];
@@ -65,11 +68,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   gameAgainButton.addEventListener('click', () => {
+    gameAgainListeners(gameAgainButton, winModal);
+  });
+
+  gameAgainAfterGameover.addEventListener('click', () => {
+    gameAgainListeners(gameAgainAfterGameover, gameoverModal);
+    paintContainer.classList.remove('sad-emoji');
+  });
+
+  function gameAgainListeners(btn, modal) {
     answerArray = [];
     ctx.clearRect(0, 0, 450, 700);
 
-    gameAgainButton.setAttribute('disabled', true);
-    winModal.classList.remove('visible');
+    btn.setAttribute('disabled', true);
+    modal.classList.remove('visible');
     mistakesNumber.textContent = '0';
     mistakesNumber.classList.remove('red');
     alphabetContainer.classList.remove('hidden');
@@ -79,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createWordCells();
     createAlphabet();
     getActiveLetter();
-  });
+  }
 
   function getRandomWord() {
     word = wordsArray[Math.floor(Math.random() * wordsArray.length)];
@@ -188,6 +200,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function finishGameIfLoss() {
+    const alphabetButtons = document.querySelectorAll('.alphabet-button');
+
+    if (mistakesNumber.textContent === '10') {
+      alphabetButtons.forEach((btn) => {
+        btn.setAttribute('disabled', true);
+      });
+
+      alphabetContainer.classList.add('hidden');
+
+      setTimeout(() => {
+      paintContainer.classList.add('sad-emoji');
+      removeAlphabet();
+      }, 500);
+
+      unguessedWord.textContent = word;
+      gameoverModal.classList.add('visible');
+      gameAgainAfterGameover.removeAttribute('disabled');
+    }
+  }
+
   function countMistakes(actLet, btn) {
     if (answerArray.includes(actLet) === false) {
       btn.closest('div').classList.add('wrong-letter');
@@ -197,17 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
       mistakesNumber.classList.add('red');
     }
 
-    const alphabetButtons = document.querySelectorAll('.alphabet-button');
-
-    if (mistakesNumber.textContent === '10') {
-      alphabetButtons.forEach((btn) => {
-        btn.setAttribute('disabled', true);
-      });
-
-      setTimeout(() => paintContainer.classList.add('sad-emoji'), 500);
-    }
-
     drawHangedSegment(mistakesNumber.textContent);
+    finishGameIfLoss();
   }
 
   function drawHangedSegment(mistakes) {
