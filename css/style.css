@@ -43,6 +43,7 @@ body {
 }
 
 .container {
+  position: relative;
   display: flex;
   margin: 0 auto;
   padding: 30px 50px;
@@ -50,6 +51,7 @@ body {
 }
 
 .left-content {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -202,7 +204,8 @@ body {
 }
 
 .win-modal,
-.gameover-modal {
+.gameover-modal,
+.choose-theme-modal {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -217,6 +220,35 @@ body {
   opacity: 0;
   visibility: hidden;
   transition: opasity .5s ease-in, visibility .5s ease-in;
+}
+
+.choose-theme-modal {
+  left: 70%;
+  top: 52%;
+}
+
+.main-themes {
+  margin-bottom: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.choose-theme-modal__heading,
+.choose-theme-modal__text {
+  color: var(--white);
+  font-size: 40px;
+  margin-bottom: 25px;
+}
+
+.asterisk-description {
+  text-align: right;
+  color: var(--light-grey);
+  font-size: 17px;
+}
+
+.asterisk {
+  color: var(--red);
 }
 
 .win-modal_good-job {
@@ -239,11 +271,13 @@ body {
 }
 
 .unguessed-word {
+  margin-right: 5px;
   font-style: italic;
   color: var(--red);
 }
 
-.game-again-button {
+.game-again-button,
+.choose-theme-modal__button {
   padding: 15px 20px;
   border-radius: 7px;
   border: none;
@@ -254,7 +288,15 @@ body {
   cursor: pointer;
 }
 
-.game-again-button:hover {
+.choose-theme-modal__button {
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 13px 15px;
+  font-size: 20px;
+}
+
+.game-again-button:hover,
+.choose-theme-modal__button:hover {
   background-color: var(--light-grey);
   color: #000;
 }
@@ -264,6 +306,20 @@ body {
   width: 25px;
   height: 25px;
   vertical-align: top;
+}
+
+.word-theme {
+  position: absolute;
+  top: 40px;
+  font-size: 30px;
+  color: var(--white);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .5s ease-in, visibility .5s ease-in;
+}
+
+.theme {
+  font-style: italic;
 }
 
 .visible {

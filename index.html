@@ -18,6 +18,9 @@
       <button class="start-game-button">
         Начать игру
       </button>
+      <div class="word-theme">
+        Тема: <span class="theme"></span>
+      </div>
       <div class="hangman-paint-container">
         <canvas id="canvas" width="450px" height="700px"></canvas>
       </div>
@@ -54,6 +57,57 @@
         <button class="game-again-button gameover-modal_again-button">
           Сыграть ещё раз!
         </button>
+      </div>
+    </div>
+    <div class="choose-theme-modal">
+      <div class="choose-theme-modal__heading">
+        Выберите тему:
+      </div>
+      <div class="main-themes">
+        <button class="choose-theme-modal__button" id="button-animals">
+          животные и рептилии
+        </button>
+        <button class="choose-theme-modal__button" id="button-birds">
+          птицы
+        </button>
+        <button class="choose-theme-modal__button" id="button-fish">
+          рыбы и моллюски
+        </button>
+        <button class="choose-theme-modal__button" id="button-plants">
+          растения
+        </button>
+        <button class="choose-theme-modal__button" id="button-space">
+          космос
+        </button>
+        <button class="choose-theme-modal__button" id="button-clothes">
+          одежда
+        </button>
+        <button class="choose-theme-modal__button" id="button-cities">
+          города мира
+        </button>
+        <button class="choose-theme-modal__button" id="button-countries">
+          страны мира
+        </button>
+        <button class="choose-theme-modal__button" id="button-society">
+          человек и общество
+        </button>
+        <button class="choose-theme-modal__button" id="button-body">
+          человек (тело, анатомия)
+        </button>
+      </div>
+      <div class="choose-theme-modal__text">
+        или
+      </div>
+      <div class="random-themes">
+        <button class="choose-theme-modal__button" id="button-random-theme">
+          случайная тема
+        </button>
+        <button class="choose-theme-modal__button" id="button-random-word">
+          случайное слово<span class="asterisk">*</span>
+        </button>
+        <div class="asterisk-description">
+          <span class="asterisk">*</span>без указания темы
+        </div>
       </div>
     </div>
   </div>

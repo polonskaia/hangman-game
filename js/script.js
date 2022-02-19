@@ -13,6 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameoverModal = document.querySelector('.gameover-modal');
   const unguessedWord = document.querySelector('.unguessed-word');
   const gameAgainAfterGameover = document.querySelector('.gameover-modal_again-button');
+  const wordThemeWrapper = document.querySelector('.word-theme');
+  const theme = document.querySelector('.theme');
+  // theme-buttons
+  const buttonAnimals = document.getElementById('button-animals');
+  const buttonBirds = document.getElementById('button-birds');
+  const buttonFish = document.getElementById('button-fish');
+  const buttonPlants = document.getElementById('button-plants');
+  const bittonSpace = document.getElementById('button-space');
+  const buttonClothes = document.getElementById('button-clothes');
+  const buttonCities = document.getElementById('button-cities');
+  const buttonCountries = document.getElementById('button-countries');
+  const buttonSociety = document.getElementById('button-society');
+  const buttonBody = document.getElementById('button-body');
+  const buttonRandomTheme = document.getElementById('button-random-theme');
+  const buttonRandomWord = document.getElementById('button-random-word');
 
   let word;
   let answerArray = [];
@@ -22,38 +37,442 @@ document.addEventListener('DOMContentLoaded', () => {
     'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц',
     'Ч', 'Ш', 'Щ', 'ъ', 'ы', 'ь', 'Э', 'Ю', 'Я'];
 
-  const wordsArray = [
-    'характер',
-    'урок',
-    'реальность',
-    'колесо',
-    'следствие',
-    'подруга',
-    'температура',
-    'красота',
-    'животное',
-    'профессия',
-    'момент',
-    'впечатление',
-    'результат',
-    'водитель',
-    'разговор',
-    'создание',
-    'ошибка',
-    'инициатива',
-    'мнение',
-    'деревня',
-    'восток',
-    'неделя',
-    'реакция',
-    'поколение',
-    'произведение',
-    'середина',
-    'психология',
-    'математика',
-    'колено',
-    'волос'
+  let wordsArray;
+
+  // const wordsArray = [
+  //   'характер',
+  //   'урок',
+  //   'реальность',
+  //   'колесо',
+  //   'следствие',
+  //   'подруга',
+  //   'температура',
+  //   'красота',
+  //   'животное',
+  //   'профессия',
+  //   'момент',
+  //   'впечатление',
+  //   'результат',
+  //   'водитель',
+  //   'разговор',
+  //   'создание',
+  //   'ошибка',
+  //   'инициатива',
+  //   'мнение',
+  //   'деревня',
+  //   'восток',
+  //   'неделя',
+  //   'реакция',
+  //   'поколение',
+  //   'произведение',
+  //   'середина',
+  //   'психология',
+  //   'математика',
+  //   'колено',
+  //   'волос'
+  // ];
+
+  const animals = [
+    'медведь',
+    'гепард',
+    'корова',
+    'крокодил',
+    'лягушка',
+    'кенгуру',
+    'бегемот',
+    'обезьяна',
+    'ящерица',
+    'выдра',
+    'носорог',
+    'тюлень',
+    'черепаха',
+    'леопард',
+    'кошка',
+    'собака',
+    'хомяк',
+    'лисица',
+    'свинья',
+    'лошадь',
+    'цыплёнок',
+    'кролик',
+    'шиншилла',
+    'крыса',
+    'ягнёнок',
+    'козёл',
+    'муравей',
+    'игуана',
+    'панда',
+    'ленивец',
+    'коала',
+    'пантера',
+    'утконос',
+    'косуля',
+    'барсук',
+    'жираф',
+    'горилла',
+    'бабочка',
   ];
+
+  const birds = [
+    'баклан',
+    'воробей',
+    'ворона',
+    'гагара',
+    'глухарь',
+    'горлица',
+    'дятел',
+    'жаворонок',
+    'зяблик',
+    'иволга',
+    'камышовка',
+    'кукушка',
+    'куропатка',
+    'ласточка',
+    'неясыть',
+    'перепел',
+    'сапсан',
+    'синица',
+    'скворец',
+    'снегирь',
+    'соловей',
+    'стриж',
+    'тетерев',
+    'трясогузка',
+    'филин',
+    'цапля',
+    'чайка',
+    'щегол',
+    'ястреб',
+    'страус',
+    'фламинго',
+    'пингвин',
+    'индюк',
+    'попугай',
+    'курица',
+    'колибри',
+    'беркут',
+    'павлин',
+    'журавль',
+  ];
+
+  const fishAndShellfish = [
+    'анчоус',
+    'барбус',
+    'горбуша',
+    'гурами',
+    'данио',
+    'корюшка',
+    'гуппи',
+    'зубатка',
+    'карась',
+    'минтай',
+    'мурена',
+    'налим',
+    'осётр',
+    'окунь',
+    'палтус',
+    'пескарь',
+    'пелядь',
+    'пиранья',
+    'плотва',
+    'путассу',
+    'сайра',
+    'сибасс',
+    'осьминог',
+    'мидия',
+    'креветка',
+    'кальмар',
+    'каракатица',
+  ];
+
+  const space = [
+    'астронавт',
+    'космонавт',
+    'атмосфера',
+    'луноход',
+    'ракета',
+    'солнце',
+    'планета',
+    'комета',
+    'астероид',
+    'вакуум',
+    'вселенная',
+    'галактика',
+    'звезда',
+    'спутник',
+    'космодром',
+    'кратер',
+    'метеорит',
+    'меркурий',
+    'сатурн',
+    'невесомость',
+    'орбита',
+    'пришелец',
+    'инопланетянин',
+    'телескоп',
+    'созвездие',
+    'затмение',
+    'юпитер',
+    'нептун',
+    'плутон',
+    'метеор',
+    'марсианин',
+  ];
+
+  const countries = [
+    'албания',
+    'армения',
+    'бангладеш',
+    'боливия',
+    'ботсвана',
+    'ватикан',
+    'венгрия',
+    'гондурас',
+    'греция',
+    'германия',
+    'замбия',
+    'зимбабве',
+    'израиль',
+    'ирландия',
+    'исландия',
+    'йемен',
+    'камерун',
+    'камбоджа',
+    'кения',
+    'кувейт',
+    'лихтенштейн',
+    'люксембург',
+    'мексика',
+    'монголия',
+    'никарагуа',
+    'нидерланды',
+    'польша',
+    'палестина',
+    'руанда',
+    'россия',
+    'румыния',
+    'сенегал',
+    'сингапур',
+    'сербия',
+    'словакия',
+    'словения',
+    'тунис',
+    'турция',
+    'украина',
+    'уганда',
+    'уругвай',
+    'фиджи',
+    'филиппины',
+    'франция',
+    'хорватия',
+    'черногория',
+    'швейцария',
+    'швеция',
+    'эфиопия',
+    'эквадор',
+    'эстония',
+    'ямайка',
+    'япония',
+  ];
+
+  const cities = [
+    'шанхай',
+    'пекин',
+    'мумбаи',
+    'стамбул',
+    'москва',
+    'харьков',
+    'гуанчжоу',
+    'токио',
+    'джакарта',
+    'лондон',
+    'тегеран',
+    'бангкок',
+    'калькутта',
+    'осака',
+    'париж',
+    'манила',
+    'богота',
+    'чикаго',
+    'челябинск',
+    'багдад',
+    'хьюстон',
+    'торонто',
+    'даллас',
+    'сигапур',
+    'барселона',
+    'йоханнесбург',
+    'вашингтон',
+    'екатеринбург',
+    'астрахань',
+    'амстердам',
+    'ашхабад',
+    'берлин',
+    'бухарест',
+    'вильнюс',
+    'загреб',
+    'кишинёв',
+    'лиссабон',
+    'любляна',
+    'минск',
+    'найроби',
+    'пхеньян',
+    'рейкьявик',
+    'запорожье',
+    'херсон',
+    'полтава',
+    'житомир',
+    'магнитогорск',
+    'черкассы',
+    'казань',
+    'самара',
+    'калининград',
+    'мюнхен',
+    'кёльн',
+    'гамбург',
+    'дрезден',
+    'бремен',
+  ];
+
+  const humanSociety = [
+    'мужчина',
+    'женщина',
+    'молодёжь',
+    'детство',
+    'ребёнок',
+    'гражданин',
+    'личность',
+    'национальность',
+    'интеллигент',
+    'фамилия',
+    'цивилизация',
+    'индивид',
+    'демократия',
+    'политик',
+    'президент',
+    'преступник',
+    'безработица',
+    'банкрот',
+    'религия',
+    'подросток',
+    'юность',
+    'монархия',
+    'социум',
+    'государство',
+    'община',
+    'компания',
+    'группа',
+    'коммуна',
+    'дружба',
+    'население',
+  ];
+
+  const humanBody = [
+    'подбородок',
+    'голова',
+    'волос',
+    'спина',
+    'живот',
+    'мизинец',
+    'предплечье',
+    'сустав',
+    'запястье',
+    'лодыжка',
+    'ступня',
+    'голень',
+    'бедро',
+    'сердце',
+    'печень',
+    'зрачок',
+    'селезёнка',
+    'желудок',
+    'ключица',
+    'челюсть',
+    'позвоночник',
+    'скелет',
+    'череп',
+    'ребро',
+    'копчик',
+    'мышца',
+    'артерия',
+    'кровь',
+    'палец',
+    'сухожилие',
+    'гипофиз',
+    'трахея',
+  ];
+
+  const clothes = [
+    'платье',
+    'пиджак',
+    'джинсы',
+    'брюки',
+    'штанина',
+    'рукав',
+    'жилет',
+    'кардиган',
+    'пуловер',
+    'воротник',
+    'манжета',
+    'пуговица',
+    'колготки',
+    'кроссовки',
+    'костюм',
+    'сапог',
+    'перчатка',
+    'ремень',
+    'футболка',
+    'шапка',
+    'шляпа',
+    'шорты',
+    'водолазка',
+    'толстовка',
+    'свитер',
+    'сандалии',
+    'ботинки',
+    'мокасины',
+  ];
+
+  const plants = [
+    'тополь',
+    'боярышник',
+    'базилик',
+    'ромашка',
+    'орхидея',
+    'нарцисс',
+    'подсолнух',
+    'маргаритка',
+    'можжевельник',
+    'шиповник',
+    'шалфей',
+    'крапива',
+    'ландыш',
+    'фиалка',
+    'полынь',
+    'сосна',
+    'пихта',
+    'акация',
+    'кактус',
+    'пальма',
+    'земляника',
+    'мандарин',
+    'апельсин',
+    'незабудка',
+    'пшеница',
+    'рябина',
+    'черника',
+    'виноград',
+    'ананас',
+    'лиственница',
+    'крыжовник',
+    'одуванчик',
+    'тюльпан',
+    'клюква',
+    'клевер',
+    'яблоня',
+  ];
+
+  wordsArray = fishAndShellfish;
 
   startButton.addEventListener('click', () => {
     startButton.setAttribute('disabled', true);
@@ -65,6 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
     createWordCells();
     createAlphabet();
     getActiveLetter();
+    showTheme();
   });
 
   gameAgainButton.addEventListener('click', () => {
@@ -85,12 +505,14 @@ document.addEventListener('DOMContentLoaded', () => {
     mistakesNumber.textContent = '0';
     mistakesNumber.classList.remove('red');
     alphabetContainer.classList.remove('hidden');
+    wordThemeWrapper.classList.remove('visible');
 
     getRandomWord();
     removeWordCells();
     createWordCells();
     createAlphabet();
     getActiveLetter();
+    showTheme();
   }
 
   function getRandomWord() {
@@ -194,7 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
         removeAlphabet();
       }, 500);
 
-      guessedWord.textContent = word;
+      guessedWord.textContent = word.toUpperCase();
       winModal.classList.add('visible');
       gameAgainButton.removeAttribute('disabled');
     }
@@ -215,7 +637,7 @@ document.addEventListener('DOMContentLoaded', () => {
       removeAlphabet();
       }, 500);
 
-      unguessedWord.textContent = word;
+      unguessedWord.textContent = word.toUpperCase();
       gameoverModal.classList.add('visible');
       gameAgainAfterGameover.removeAttribute('disabled');
     }
@@ -232,6 +654,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     drawHangedSegment(mistakesNumber.textContent);
     finishGameIfLoss();
+  }
+
+  function showTheme() {
+    wordThemeWrapper.classList.add('visible');
+
+    if (wordsArray === animals) {
+      theme.innerHTML = 'животные';
+    } else if (wordsArray === birds) {
+      theme.innerHTML = 'птицы';
+    } else if (wordsArray === fishAndShellfish) {
+      theme.innerHTML = 'рыбы и моллюски';
+    } else if (wordsArray === space) {
+      theme.innerHTML = 'космос';
+    } else if (wordsArray === countries) {
+      theme.innerHTML = 'страны мира';
+    } else if (wordsArray === cities) {
+      theme.innerHTML = 'города мира';
+    } else if (wordsArray === plants) {
+      theme.innerHTML = 'растения';
+    } else if (wordsArray === clothes) {
+      theme.innerHTML = 'одежда';
+    } else if (wordsArray === humanSociety) {
+      theme.innerHTML = 'человек и общество';
+    } else if (wordsArray === humanBody) {
+      theme.innerHTML = 'человек (тело, анатомия)';
+    }
   }
 
   function drawHangedSegment(mistakes) {
