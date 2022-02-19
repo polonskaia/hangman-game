@@ -219,12 +219,25 @@ body {
   background-color: var(--dark-grey);
   opacity: 0;
   visibility: hidden;
-  transition: opasity .5s ease-in, visibility .5s ease-in;
 }
 
 .choose-theme-modal {
   left: 70%;
   top: 52%;
+}
+
+.choose-new-theme__button {
+  margin-top: 30px;
+  border: 1px solid transparent;
+  font-size: 20px;
+  color: var(--light-grey);
+  background-color: transparent;
+  transition: border .5s ease-in;
+  cursor: pointer;
+}
+
+.choose-new-theme__button:hover {
+  border-bottom: 1px solid var(--light-grey);
 }
 
 .main-themes {
@@ -311,11 +324,11 @@ body {
 .word-theme {
   position: absolute;
   top: 40px;
-  font-size: 30px;
+  font-size: 28px;
   color: var(--white);
   visibility: hidden;
   opacity: 0;
-  transition: opacity .5s ease-in, visibility .5s ease-in;
+  transition: opacity .4s ease-in, visibility .4s ease-in;
 }
 
 .theme {
@@ -325,6 +338,7 @@ body {
 .visible {
   visibility: visible;
   opacity: 1;
+  transition: opacity .4s ease-in, visibility .4s ease-in;
 }
 
 .hidden {

@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameAgainAfterGameover = document.querySelector('.gameover-modal_again-button');
   const wordThemeWrapper = document.querySelector('.word-theme');
   const theme = document.querySelector('.theme');
-  // theme-buttons
+  const chooseThemeModal = document.querySelector('.choose-theme-modal');
   const buttonAnimals = document.getElementById('button-animals');
   const buttonBirds = document.getElementById('button-birds');
   const buttonFish = document.getElementById('button-fish');
   const buttonPlants = document.getElementById('button-plants');
-  const bittonSpace = document.getElementById('button-space');
+  const buttonSpace = document.getElementById('button-space');
   const buttonClothes = document.getElementById('button-clothes');
   const buttonCities = document.getElementById('button-cities');
   const buttonCountries = document.getElementById('button-countries');
@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const buttonBody = document.getElementById('button-body');
   const buttonRandomTheme = document.getElementById('button-random-theme');
   const buttonRandomWord = document.getElementById('button-random-word');
+  const chooseNewThemeAfterWin = document.getElementById('new-theme-after-win');
+  const chooseNewThemeAfterGameover = document.getElementById('new-theme-after-gameover');
 
   let word;
   let answerArray = [];
@@ -38,39 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'Ч', 'Ш', 'Щ', 'ъ', 'ы', 'ь', 'Э', 'Ю', 'Я'];
 
   let wordsArray;
-
-  // const wordsArray = [
-  //   'характер',
-  //   'урок',
-  //   'реальность',
-  //   'колесо',
-  //   'следствие',
-  //   'подруга',
-  //   'температура',
-  //   'красота',
-  //   'животное',
-  //   'профессия',
-  //   'момент',
-  //   'впечатление',
-  //   'результат',
-  //   'водитель',
-  //   'разговор',
-  //   'создание',
-  //   'ошибка',
-  //   'инициатива',
-  //   'мнение',
-  //   'деревня',
-  //   'восток',
-  //   'неделя',
-  //   'реакция',
-  //   'поколение',
-  //   'произведение',
-  //   'середина',
-  //   'психология',
-  //   'математика',
-  //   'колено',
-  //   'волос'
-  // ];
 
   const animals = [
     'медведь',
@@ -93,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'лисица',
     'свинья',
     'лошадь',
-    'цыплёнок',
     'кролик',
     'шиншилла',
     'крыса',
@@ -114,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const birds = [
+    'цыплёнок',
     'баклан',
     'воробей',
     'ворона',
@@ -472,47 +441,114 @@ document.addEventListener('DOMContentLoaded', () => {
     'яблоня',
   ];
 
-  wordsArray = fishAndShellfish;
+  const allThemesArray = [animals, birds, fishAndShellfish, space, countries, cities, humanSociety, humanBody, clothes, plants];
+
+  const randomTheme = allThemesArray[Math.floor(Math.random() * allThemesArray.length)];
+
+  const allWordsArray = animals.concat(birds, fishAndShellfish, space, countries, cities, humanSociety, humanBody, clothes, plants);
 
   startButton.addEventListener('click', () => {
     startButton.setAttribute('disabled', true);
-    mistakes.classList.add('visible');
     startButton.classList.add('hidden');
-    setTimeout(() => paintContainer.classList.add('background-none'), 300);
-
-    getRandomWord();
-    createWordCells();
-    createAlphabet();
-    getActiveLetter();
-    showTheme();
+    chooseThemeModal.classList.add('visible');
   });
 
   gameAgainButton.addEventListener('click', () => {
     gameAgainListeners(gameAgainButton, winModal);
+    addListenersToStartTheGame();
   });
 
   gameAgainAfterGameover.addEventListener('click', () => {
     gameAgainListeners(gameAgainAfterGameover, gameoverModal);
+    addListenersToStartTheGame();
     paintContainer.classList.remove('sad-emoji');
   });
 
+  chooseNewThemeAfterWin.addEventListener('click', () => {
+    gameAgainListeners(gameAgainButton, winModal);
+    setTimeout(() => {
+      chooseThemeModal.classList.add('visible');
+    }, 300);
+  });
+
+  chooseNewThemeAfterGameover.addEventListener('click', () => {
+    gameAgainListeners(gameAgainAfterGameover, gameoverModal);
+    paintContainer.classList.remove('sad-emoji');
+    setTimeout(() => {
+      chooseThemeModal.classList.add('visible');
+    }, 300);
+  })
+
+  buttonAnimals.addEventListener('click', () => {
+    wordsArray = animals;
+    addListenersToStartTheGame();
+  });
+
+  buttonBirds.addEventListener('click', () => {
+    wordsArray = birds;
+    addListenersToStartTheGame();
+  });
+
+  buttonFish.addEventListener('click', () => {
+    wordsArray = fishAndShellfish;
+    addListenersToStartTheGame();
+  });
+
+  buttonPlants.addEventListener('click', () => {
+    wordsArray = plants;
+    addListenersToStartTheGame();
+  });
+
+  buttonSpace.addEventListener('click', () => {
+    wordsArray = space;
+    addListenersToStartTheGame();
+  });
+
+  buttonClothes.addEventListener('click', () => {
+    wordsArray = clothes;
+    addListenersToStartTheGame();
+  });
+
+  buttonCities.addEventListener('click', () => {
+    wordsArray = cities;
+    addListenersToStartTheGame();
+  });
+
+  buttonCountries.addEventListener('click', () => {
+    wordsArray = countries;
+    addListenersToStartTheGame();
+  });
+
+  buttonBody.addEventListener('click', () => {
+    wordsArray = humanBody;
+    addListenersToStartTheGame();
+  });
+
+  buttonSociety.addEventListener('click', () => {
+    wordsArray = humanSociety;
+    addListenersToStartTheGame();
+  });
+
+  buttonRandomTheme.addEventListener('click', () => {
+    wordsArray = randomTheme;
+    addListenersToStartTheGame();
+  });
+
+  buttonRandomWord.addEventListener('click', () => {
+    wordsArray = allWordsArray;
+    addListenersToStartTheGame();
+  });
+
   function gameAgainListeners(btn, modal) {
+    btn.setAttribute('disabled', true);
     answerArray = [];
     ctx.clearRect(0, 0, 450, 700);
-
-    btn.setAttribute('disabled', true);
     modal.classList.remove('visible');
     mistakesNumber.textContent = '0';
     mistakesNumber.classList.remove('red');
     alphabetContainer.classList.remove('hidden');
     wordThemeWrapper.classList.remove('visible');
-
-    getRandomWord();
     removeWordCells();
-    createWordCells();
-    createAlphabet();
-    getActiveLetter();
-    showTheme();
   }
 
   function getRandomWord() {
@@ -523,6 +559,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     console.log(word);
+  }
+
+  function addListenersToStartTheGame() {
+    chooseThemeModal.classList.remove('visible');
+    mistakes.classList.add('visible');
+    setTimeout(() => paintContainer.classList.add('background-none'), 300);
+
+    getRandomWord();
+    createWordCells();
+    createAlphabet();
+    getActiveLetter();
+    showTheme();
   }
 
   function createWordCells() {
@@ -660,7 +708,7 @@ document.addEventListener('DOMContentLoaded', () => {
     wordThemeWrapper.classList.add('visible');
 
     if (wordsArray === animals) {
-      theme.innerHTML = 'животные';
+      theme.innerHTML = 'животный мир';
     } else if (wordsArray === birds) {
       theme.innerHTML = 'птицы';
     } else if (wordsArray === fishAndShellfish) {
@@ -679,6 +727,8 @@ document.addEventListener('DOMContentLoaded', () => {
       theme.innerHTML = 'человек и общество';
     } else if (wordsArray === humanBody) {
       theme.innerHTML = 'человек (тело, анатомия)';
+    } else if (wordsArray === allWordsArray) {
+      theme.innerHTML = 'нет (случайное слово)';
     }
   }
 
@@ -703,7 +753,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (position <= 40) {
           position = 40;
         }
-      }, 1);
+      }, 5);
 
     } else if (mistakes === '3') {
       let position = 111;
