@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Виселица</title>
+  <title>Шибениця</title>
   <link rel="shortcut icon" href="./img/favicon.png" type="image/png">
   <link rel="stylesheet" href="./css/normalize.css">
   <link rel="stylesheet" href="./css/style.css">
@@ -13,11 +13,11 @@
 <body>
   <div class="container">
     <h1 class="heading visually-hidden">
-      Виселица
+      Шибениця
     </h1>
     <div class="left-content">
       <button class="start-game-button">
-        Начать игру
+        Почати гру
       </button>
       <div class="word-theme">
         Тема: <span class="theme"></span>
@@ -26,7 +26,7 @@
         <canvas id="canvas" width="450px" height="700px"></canvas>
       </div>
       <div class="mistakes">
-        Допущено ошибок: <span class="mistakes-number">0</span>/10
+        Зроблено помилок: <span class="mistakes-number">0</span>/10
       </div>
     </div>
     <div class="right-content">
@@ -34,86 +34,87 @@
       <div class="alphabet"></div>
       <div class="win-modal">
         <div class="win-modal_good-job">
-          Хорошая работа!
+          Молодець! Гарна робота!
         </div>
         <div class="win-modal-guessed-word">
-          Вы отгадали слово <span class="guessed-word"></span>
+          Ти відгадав слово <span class="guessed-word"></span>
         </div>
         <button class="game-again-button">
-          Сыграть ещё раз!
+          Зіграти ще раз!
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#f6bb18" class="bi bi-emoji-smile" viewbox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
             <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
           </svg>
         </button>
         <button class="choose-new-theme__button" id="new-theme-after-win">
-          выбрать другую тему
+          обрати іншу тему
         </button>
       </div>
       <div class="gameover-modal">
         <div class="gameover-modal_text">
-          Очень жаль, вы не смогли отгадать слово <span class="unguessed-word"></span>
+          Дуже шкода, але ти не зміг відгадати слово <span class="unguessed-word"></span>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-frown" viewbox="0 0 16 16">
             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
             <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
           </svg>
+          <p>Спробуєш ще раз?</p>
         </div>
         <button class="game-again-button gameover-modal_again-button">
-          Сыграть ещё раз!
+          Зіграти ще раз!
         </button>
         <button class="choose-new-theme__button" id="new-theme-after-gameover">
-          выбрать другую тему
+          обрати іншу тему
         </button>
       </div>
     </div>
     <div class="choose-theme-modal">
       <div class="choose-theme-modal__heading">
-        Выберите тему:
+        Виберіть тему:
       </div>
       <div class="main-themes">
         <button class="choose-theme-modal__button" id="button-animals">
-          животный мир
+          тваринний світ
         </button>
         <button class="choose-theme-modal__button" id="button-birds">
-          птицы
+          птахи
         </button>
         <button class="choose-theme-modal__button" id="button-fish">
-          рыбы и моллюски
+          риби та молюски
         </button>
         <button class="choose-theme-modal__button" id="button-plants">
-          растения
+          рослини
         </button>
         <button class="choose-theme-modal__button" id="button-space">
           космос
         </button>
         <button class="choose-theme-modal__button" id="button-clothes">
-          одежда
+          одяг та взуття
         </button>
         <button class="choose-theme-modal__button" id="button-cities">
-          города мира
+          міста світу
         </button>
         <button class="choose-theme-modal__button" id="button-countries">
-          страны мира
+          країни світу
         </button>
         <button class="choose-theme-modal__button" id="button-society">
-          человек и общество
+          людина і суспільство
         </button>
         <button class="choose-theme-modal__button" id="button-body">
-          человек (тело, анатомия)
+          людське тіло та анатомія
         </button>
       </div>
       <div class="choose-theme-modal__text">
-        или
+        або
       </div>
       <div class="random-themes">
         <button class="choose-theme-modal__button" id="button-random-theme">
-          случайная тема
+          випадкова тема
         </button>
         <button class="choose-theme-modal__button" id="button-random-word">
-          случайное слово<span class="asterisk">*</span>
+          випадкове слово<span class="asterisk">*</span>
         </button>
         <div class="asterisk-description">
-          <span class="asterisk">*</span>без указания темы
+          <span class="asterisk">*</span>тема не буде зазначена
         </div>
       </div>
     </div>
